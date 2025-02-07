@@ -21,7 +21,7 @@ export class AuthService {
     signIn(username: string, password: string): AuthResponseDto {
         const foundUser = this.usersService.findByUsername(username);
 
-        if (!foundUser || !bcryptCompareSync(password, foundUser.password))
+        if (!foundUser || !bcryptCompareSync(password, foundUser.password.toString()))
             throw new UnauthorizedException('Invalid username or password');
 
         const payload = { 

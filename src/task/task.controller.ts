@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
-import { FindAllParameters, TaskDto } from './task.dto';
+import { IFindAllParameters, TaskDto } from './task.dto';
 import { TaskService } from './task.service';
 import { AuthGuard } from 'src/auth/auth.guard';
 
@@ -20,7 +20,7 @@ export class TaskController {
     }
 
     @Get()
-    findAll(@Query() params: FindAllParameters): TaskDto[] {
+    findAll(@Query() params: IFindAllParameters): TaskDto[] {
         return this.taskService.findAll(params);
     }
 

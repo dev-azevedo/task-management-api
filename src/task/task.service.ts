@@ -1,11 +1,14 @@
 import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
-import { FindAllParameters, TaskDto } from './task.dto';
+import { ETaskStatus, IFindAllParameters, TaskDto } from './task.dto';
+import {v4 as uuid} from 'uuid';
 
 @Injectable()
 export class TaskService {
     private tasks: TaskDto[] = [];
 
     create(task: TaskDto) {
+        task.id = uuid();
+        task.status = ETaskStatus.TO_DO;
         this.tasks.push(task);
         console.log(this.tasks);
     }
@@ -19,7 +22,7 @@ export class TaskService {
         return task;
     }
 
-    findAll(params: FindAllParameters): TaskDto[] {
+    findAll(params: IFindAllParameters): TaskDto[] {
         return this.tasks.filter(task => {
             let match = true;
 
