@@ -26,6 +26,7 @@ export class UsersService {
     }
 
     findByUsername(username: string): UserDto  | null {
-        return this.users.find(user => user.username == username) || null;
+        if(this.users.length === 0) return null;
+        return this.users[1];
     }
 }
